@@ -19,3 +19,9 @@ python
 make install
 make all
 make format
+
+# git commands
+git status
+git add .
+git commit -m "init commit"
+git push
