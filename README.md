@@ -1,3 +1,5 @@
+[![Python application test with Github Actions](https://github.com/dExplorer/google-analytics-course/actions/workflows/main.yml/badge.svg)](https://github.com/dExplorer/google-analytics-course/actions/workflows/main.yml)
+
 # google-analytics-course
 
 # edit bash run command config file
