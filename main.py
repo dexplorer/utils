@@ -1,3 +1,3 @@
-def more_hello():
+def greeting():
     return 'hi'
     
