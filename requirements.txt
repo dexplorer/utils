@@ -1,11 +1,6 @@
+# standard 
 pytest
 pytest-cov
 pylint
 black
 ipython
-# nn_sin_numpy.py
-numpy
-matplotlib
-seaborn
-# nn_sin_numpy.py
-torch

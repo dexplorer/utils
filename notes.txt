@@ -1,0 +1,38 @@
+# create python virtual env
+python -m venv ~/.venv
+
+# check which python env is active
+which python
+
+# enter python shell in interactive mode
+python
+
+# edit bash run command config file
+vim ~/.bashrc
+
+# apply bashrc edits to current session
+source ~/.bashrc
+
+# make file commands
+make install
+make all
+make format
+
+# git commands
+git status
+git add .
+git commit -m "init commit"
+git push
+
+# git diff commands
+
+Depending on your exact situation, there are three useful ways to use git diff:
+
+Show differences between index and working tree; that is, changes you haven't staged to commit:
+git diff [filename]
+Show differences between current commit and index; that is, what you're about to commit (--staged does exactly the same thing, use what you like):
+git diff --cached [filename]
+git diff --staged
+Show differences between current commit and working tree:
+git diff HEAD [filename]
+git diff works recursively on directories, and if no paths are given, it shows all changes.
