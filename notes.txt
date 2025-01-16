@@ -1,5 +1,16 @@
-# create python virtual env
-python -m venv ~/.venv
+# github codespace init setup
+# check image 
+uname -a
+
+# press tab for autocomplete in cmd line
+
+# edit bash run command config file
+vim ~/.bashrc
+
+# add a new amd alias in bashrc profile file
+vim ~/.bashrc
+alias tmpTOP = 'cd /tmp'
+<ESC> :wq to save
 
 # check which python env is active
 which python
@@ -7,8 +18,16 @@ which python
 # enter python shell in interactive mode
 python
 
-# edit bash run command config file
+# map python cmd to specific version of python 
 vim ~/.bashrc
+alias python="/usr/local/bin/python3.12"
+
+# create python virtual env
+python -m venv ~/.venv
+
+# activate python virt env already setup in machine
+vim ~/.bashrc
+source ~/.venv/bin/activate
 
 # apply bashrc edits to current session
 source ~/.bashrc
