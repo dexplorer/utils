@@ -17,6 +17,7 @@ which python
 
 # enter python shell in interactive mode
 python
+exit() to exit
 
 # map python cmd to specific version of python 
 vim ~/.bashrc
