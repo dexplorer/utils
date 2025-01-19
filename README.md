@@ -2,3 +2,4 @@
 
 # utils
 
+This is a python utility package.

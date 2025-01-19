@@ -36,3 +36,34 @@ git diff --staged
 Show differences between current commit and working tree:
 git diff HEAD [filename]
 git diff works recursively on directories, and if no paths are given, it shows all changes.
+
+# git create new branch
+git branch NEW_BRANCH_NAME 
+or 
+git -b NEW_BRANCH_NAME
+or 
+git --create NEW_BRANCH_NAME
+or 
+git --c NEW_BRANCH_NAME
+
+# git create new branch and switch to it
+git checkout -b NEW_BRANCH_NAME
+or 
+git switch --create NEW_BRANCH_NAME 
+or 
+git switch --c NEW_BRANCH_NAME
+
+# git switch to branch 
+git checkout BRANCH_NAME
+or 
+git switch BRANCH_NAME
+
+
+# python venv related
+
+# list packages installed in python venv
+pip freeze --local
+pip list --local
+
+# remove packages installed in python venv
+pip freeze | xargs pip uninstall -y
