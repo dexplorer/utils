@@ -1,4 +1,3 @@
-import os
 import logging
 
 
@@ -14,4 +13,3 @@ def config_logger(log_file_name):
     )
     logging.captureWarnings(True)
     # logging.FileHandler(filename, mode='a', encoding=None, delay=False)
-    

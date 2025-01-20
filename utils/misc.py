@@ -17,4 +17,3 @@ def dedupe_list_of_dict(records: list) -> list:
 
 def flatten_list(nested_list: list) -> list:
     return [item for inner_list in nested_list for item in inner_list]
-    

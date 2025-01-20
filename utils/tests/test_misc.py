@@ -1,5 +1,5 @@
 import pytest
-from dp_app.utils import misc as ufm
+from utils import misc as ufm
 
 test_data1 = [
     (
@@ -52,30 +52,23 @@ test_data2 = [
 def test_dedupe_list_of_dict(records: list[dict], expected_output: list[dict]):
     assert ufm.dedupe_list_of_dict(records) == expected_output
 
+
 test_data3 = [
     (
         [
-            'a',
-            ['b', 'c'],
-            'd', 
+            "a",
+            ["b", "c"],
+            "d",
         ],
-        [
-            'a', 'b', 'c', 'd'
-        ],
+        ["a", "b", "c", "d"],
     ),
     (
-        [
-            [1, 2],
-            [3, 4, 5],
-            'z'
-        ],
-        [
-            [1, 2, 3, 4, 5, 'z']
-        ],
+        [[1, 2], [3, 4, 5], "z"],
+        [1, 2, 3, 4, 5, "z"],
     ),
 ]
+
 
 @pytest.mark.parametrize("nested_list, expected_output", test_data3)
 def test_flatten_list(nested_list: list, expected_output: list):
     assert ufm.flatten_list(nested_list) == expected_output
-    

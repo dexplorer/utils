@@ -33,10 +33,18 @@ source ~/.venv/bin/activate
 # apply bashrc edits to current session
 source ~/.bashrc
 
+# python setup install - installs packages and adds them to namespaces
+python setup.py install 
+
 # make file commands
 make install
 make all
 make format
+make test 
+
+####
+# git related
+####
 
 # git commands
 git status
@@ -63,15 +71,13 @@ or
 git -b NEW_BRANCH_NAME
 or 
 git --create NEW_BRANCH_NAME
-or 
-git --c NEW_BRANCH_NAME
 
 # git create new branch and switch to it
 git checkout -b NEW_BRANCH_NAME
 or 
 git switch --create NEW_BRANCH_NAME 
 or 
-git switch --c NEW_BRANCH_NAME
+git switch -c NEW_BRANCH_NAME
 
 # git switch to branch 
 git checkout BRANCH_NAME
@@ -79,7 +85,28 @@ or
 git switch BRANCH_NAME
 
 
+# Merge changes in remote as well as local branches
+
+Create a local dev branch, because then the full merge conflict resolution will let you fix the problem.
+
+git checkout -b dev
+git add .
+git commit -m 'adding local changes'
+git checkout main
+
+Now use your regular git pull or git fetch workflow, possibly with stash. I like fetch best but your stash/pull should work too.
+
+git stash # this is needed to stash away the changes temporarily
+git pull
+
+Then, before applying the stash, you should merge in dev, to apply the new file and fix the merge conflict
+
+git merge dev # add --squash to avoid getting a bubble in your tree
+# fix conflict and commit
+
+####
 # python venv related
+####
 
 # list packages installed in python venv
 pip freeze --local
@@ -87,3 +114,24 @@ pip list --local
 
 # remove packages installed in python venv
 pip freeze | xargs pip uninstall -y
+
+####
+# python interpreter/shell
+####
+
+# enter shell
+python
+
+# exit shell 
+exit()
+
+####
+# ipython notebook interpreter/shell
+####
+
+# enter shell
+ipython
+
+# exit shell 
+exit()
+

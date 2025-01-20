@@ -4,16 +4,16 @@ install:
 
 lint:
 	pylint --disable=R,C *.py &&\
-	pylint --disable=R,C tests/*.py
+	pylint --disable=R,C utils/*.py &&\
+	pylint --disable=R,C utils/tests/*.py
 
 test:
-	python -m pytest -vv --cov=file_io tests/test_file_io.py
-	python -m pytest -vv --cov=logger tests/test_logger.py
-	python -m pytest -vv --cov=misc tests/test_misc.py
+	python -m pytest -vv --cov=utils utils/tests
 
 format:
 	black *.py &&\
-	black dqml_app/tests/*.py
+	black utils/*.py
+	black utils/tests/*.py
 
 all:
 	install lint format test
