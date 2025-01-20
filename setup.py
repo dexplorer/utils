@@ -1,8 +1,8 @@
 import setuptools
 
 setuptools.setup(
-    name="package_utils",
-    version="1.0",
+    name="utils",
+    version="1.0.0",
     scripts=["./scripts/utils"],
     author="Me",
     description="utils python package install",

@@ -3,3 +3,10 @@
 # utils
 
 This is a python utility package.
+
+### Install
+
+- **Install via setuptools**:
+  ```sh
+    python setup.py install
+  ```
