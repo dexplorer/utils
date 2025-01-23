@@ -1,4 +1,4 @@
-[![Python application test with Github Actions](https://github.com/dExplorer/utils/actions/workflows/main.yml/badge.svg)](https://github.com/dExplorer/utils/actions/workflows/main.yml)
+[![utils CI pipeline with Github Actions](https://github.com/dexplorer/utils/actions/workflows/ci.yml/badge.svg)](https://github.com/dexplorer/utils/actions/workflows/ci.yml)
 
 # utils
 
