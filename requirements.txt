@@ -6,3 +6,5 @@ black
 ipython
 # standard py app specific
 setuptools
+# app specific 
+requests
