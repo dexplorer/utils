@@ -2,6 +2,9 @@ install:
 	pip install --upgrade pip &&\
 	pip install -r requirements.txt
 
+setup: 
+	python setup.py install
+
 lint:
 	pylint --disable=R,C *.py &&\
 	pylint --disable=R,C utils/*.py &&\
@@ -16,4 +19,4 @@ format:
 	black utils/tests/*.py
 
 all:
-	install lint format test
+	install setup lint format test 

@@ -6,7 +6,7 @@ setuptools.setup(
     scripts=["./scripts/utils"],
     author="Me",
     description="utils python package install",
-    url="https://github.com/dexplorer/utils", 
+    url="https://github.com/dexplorer/utils",
     # packages=setuptools.find_packages(),
     packages=[
         "utils",
