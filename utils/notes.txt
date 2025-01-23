@@ -114,6 +114,10 @@ pip list --local
 
 # remove packages installed in python venv
 pip freeze | xargs pip uninstall -y
+pip freeze --local | xargs pip uninstall -y
+
+# get python command line options
+python —help 
 
 ####
 # python interpreter/shell
@@ -134,4 +138,11 @@ ipython
 
 # exit shell 
 exit()
+
+####
+# bash shell
+####
+
+# lookup bash manual for commands or anything
+man bash | grep -C "$@"
 
