@@ -14,6 +14,7 @@ setuptools.setup(
     # packages = find_packages(),
     install_requires=[
         "setuptools",
+        "requests", 
     ],
     python_requires=">=3.12",
 )
