@@ -1,5 +1,6 @@
-import requests 
+import requests
 import logging
+
 
 def get_http_response(url: str):
     try:
@@ -15,4 +16,4 @@ def get_http_response(url: str):
     except requests.exceptions.RequestException as err:
         logging.error(err)
 
-    return response 
+    return response
