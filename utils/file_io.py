@@ -1,7 +1,7 @@
 import logging
 import csv
 
-csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_NONE)
+csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_STRINGS)
 
 
 def uf_open_file(file_path: str, open_mode: str):
