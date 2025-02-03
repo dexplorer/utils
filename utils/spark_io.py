@@ -1,7 +1,4 @@
-from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.types import StructType, StructField, StringType, DecimalType
-from pyspark.sql.functions import col
-import pandas as pd 
+from pyspark.sql import SparkSession
 
 def create_spark_session(warehouse_path) -> SparkSession:
     # Initialize Spark session
