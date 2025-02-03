@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, DataFrame
 
 def create_spark_session(warehouse_path) -> SparkSession:
     # Initialize Spark session
@@ -29,12 +29,19 @@ def read_spark_table_into_list_of_dict(qual_target_table_name: str, cur_eff_date
     print("Spark dataframe")
     df.printSchema()
     df.show(2)
-    records = df.collect()
-    print(type(records))
+    records = convert_df_to_list_of_dict(df=df)
+    print("Records")
     print(records[:2])
 
-    # pdf = df.toPandas()
-    # print(pdf.info())
-    # print(pdf.head(2))
-
     return records 
+
+def convert_df_to_list_of_dict(df: DataFrame) -> list[dict]:
+    rows = df.collect()
+    records = [row.asDict() for row in rows]
+    return records
+
+# def convert_df_to_pandas_df(df: DataFrame) -> pd.DataFrame:
+#     pdf = df.toPandas()
+#     print(pdf.info())
+#     print(pdf.head(2))
+#     return pdf 
