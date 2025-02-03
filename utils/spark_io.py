@@ -17,9 +17,9 @@ def create_spark_session(warehouse_path) -> SparkSession:
 
     return spark
 
-def read_spark_table_into_list_of_dict(qual_target_table_name: str, cur_eff_date: str = '', spark: SparkSession = None) -> list[dict]:
-    if not spark:
-        spark = create_spark_session(warehouse_path=sc.warehouse_path)
+def read_spark_table_into_list_of_dict(qual_target_table_name: str, cur_eff_date: str = '', spark: SparkSession = None, warehouse_path: str = '') -> list[dict]:
+    if (not spark) and warehouse_path:
+        spark = create_spark_session(warehouse_path=warehouse_path)
 
     if cur_eff_date:
         df = spark.sql(
