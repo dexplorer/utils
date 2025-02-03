@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="utils",
-    version="1.0.2",
+    version="1.0.3",
     scripts=["./scripts/utils"],
     author="Me",
     description="utils python package install",
@@ -15,6 +15,7 @@ setuptools.setup(
     install_requires=[
         "setuptools",
         "requests",
+        "pyspark==3.5.4",
     ],
     python_requires=">=3.12",
 )

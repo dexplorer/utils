@@ -6,7 +6,8 @@ install: requirements.txt
 It is supposed to run only if the requirements.txt has changed.
 
 setup: 
-	python setup.py install
+	# python setup.py install
+	pip install .
 
 lint:
 	pylint --disable=R,C *.py &&\

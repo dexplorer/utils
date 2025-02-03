@@ -8,3 +8,5 @@ ipython
 setuptools
 # app specific 
 requests
+pyspark
+pandas
