@@ -6,7 +6,8 @@ This is a python utility package.
 
 ### Install
 
-- **Install via setuptools**:
-  ```sh
-    python setup.py install
+- **Install via Makefile and pip**:
+  ```
+    make install
+    make setup
   ```
