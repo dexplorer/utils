@@ -45,3 +45,17 @@ def uf_read_delim_file_to_list_of_dict(file_path: str, delim=",") -> list[dict]:
     except ValueError as error:
         logging.error(error)
         raise
+
+def uf_read_file_to_str(file_path: str) -> list[dict]:
+    with uf_open_file(file_path=file_path, open_mode="r") as f:
+        file_data = file.read()
+
+    try:
+        if file_data:
+            # print(file_records[:2])
+            return file_data
+        else:
+            raise ValueError("Error in reading the file.")
+    except ValueError as error:
+        logging.error(error)
+        raise

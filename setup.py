@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="utils",
-    version="1.0.3",
+    version="1.0.4",
     scripts=["./scripts/utils"],
     author="Me",
     description="utils python package install",
