@@ -46,6 +46,7 @@ def uf_read_delim_file_to_list_of_dict(file_path: str, delim=",") -> list[dict]:
         logging.error(error)
         raise
 
+
 def uf_read_file_to_str(file_path: str) -> list[dict]:
     with uf_open_file(file_path=file_path, open_mode="r") as f:
         file_data = f.read()

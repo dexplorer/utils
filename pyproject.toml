@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools >= 64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "utils"
+version = "0.0.1"
+authors = [
+  { name="Rajakumaran Arivumani", email="author@example.com" },
+]
+description = "Utilities package"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+#license = "MIT"
+#license-files = ["LICEN[CS]E*"]
+dependencies = [
+  # app specific 
+  "pyspark == 3.5.4",
+  "pandas == 2.1.4",
+  "requests", 
+]
+keywords = ["data", "utils", "etl", "elt", "framework", "io"]
+
+[project.optional-dependencies]
+test = [
+  # standard dev tools
+  "pytest",
+  "pytest-cov",
+  "pylint",
+  "black",
+  "ipython",
+]
+
+[project.scripts]
+
+[project.urls]
+Homepage = "https://profile.rajakumaran.in"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/dexplorer/utils.git"
+Issues = "https://github.com/dexplorer/utils/issues"
+Changelog = "https://github.com/dexplorer/utils/blob/master/CHANGELOG.md"
