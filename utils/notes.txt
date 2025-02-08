@@ -47,10 +47,27 @@ make test
 ####
 
 # git commands
+# Let's say you have created a new repo on github. So the first step would be to clone the repo:git clone {Your Repo URL}
+
+# You do your work, add some files, code etc., then push your changes with:
+
 git status
 git add .
-git commit -m "init commit"
+git commit -m "first commit"
 git push
+
+# Now our changes are in main branch. Let's create a tag:
+
+git tag v1.0.0                    # creates tag locally     
+git push origin v1.0.0            # pushes tag to remote
+
+# If you want to delete the tag:
+
+git tag --delete v1.0.0           # deletes tag locally    
+git push --delete origin v1.0.0   # deletes remote tag
+
+# Discard unstaged changes
+git checkout . 
 
 # git diff commands
 
