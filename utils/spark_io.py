@@ -31,12 +31,12 @@ def read_spark_table_into_list_of_dict(
         )
     else:
         df = spark.sql(f"SELECT * FROM {qual_target_table_name};")
-    print("Spark dataframe")
-    df.printSchema()
-    df.show(2)
+    # print("Spark dataframe")
+    # df.printSchema()
+    # df.show(2)
     records = convert_df_to_list_of_dict(df=df)
-    print("Records")
-    print(records[:2])
+    # print("Records")
+    # print(records[:2])
 
     return records
 
