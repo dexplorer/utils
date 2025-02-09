@@ -1,19 +1,17 @@
 import logging
 import csv
 
-csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_STRINGS)
-
 
 def uf_open_file(file_path: str, open_mode: str):
     """
     Open a file with exception handling.
 
-    :param file_path: File path
-    :type file_path: str
-    :param open_mode: File open mode
-    :type open_mode: str
-    :return: File object
-    :rtype: TextIOWrapper
+    Args:
+        file_path: File path
+        open_mode: File open mode
+
+    Returns:
+        A file object which is an instance of TextIOWrapper.
     """
 
     try:
@@ -26,28 +24,42 @@ def uf_open_file(file_path: str, open_mode: str):
         return f
 
 
-def uf_read_delim_file_to_list_of_dict(file_path: str, delim=",") -> list[dict]:
-    with uf_open_file(file_path=file_path, open_mode="r") as f:
-        if delim == "|":
-            reader = csv.DictReader(f, dialect="pipe")
-        else:
-            # reader = csv.DictReader(f, fieldnames=content_header) # omit fieldnames to use the first row as field names
-            reader = csv.DictReader(f)
+def uf_open_file_list(files: list[str]) -> fileinput.FileInput:
+    """
+    Open a list of files with exception handling.
 
-        file_records: list[dict] = [row for row in reader]
+    Args:
+        files: List of files.
+
+    Returns:
+        An instance of FileInput.
+    """
 
     try:
-        if file_records:
-            # print(file_records[:2])
-            return file_records
+        if files:
+            fi = fileinput.input(files=files, encoding="utf-8")
         else:
-            raise ValueError("Error in reading the file.")
+            raise ValueError("File list is empty.")
+
     except ValueError as error:
         logging.error(error)
         raise
 
+    else:
+        return fi
+
 
 def uf_read_file_to_str(file_path: str) -> list[dict]:
+    """
+    Open a file and outputs its contents as a text string.
+
+    Args:
+        file_path: File path
+
+    Returns:
+        The contents of the file as a text string.
+    """
+
     with uf_open_file(file_path=file_path, open_mode="r") as f:
         file_data = f.read()
 
