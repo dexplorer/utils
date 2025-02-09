@@ -1,5 +1,5 @@
 import logging
-import csv
+import fileinput
 
 
 def uf_open_file(file_path: str, open_mode: str):

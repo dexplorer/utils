@@ -2,7 +2,6 @@
 # import os
 import csv
 import glob
-import fileinput
 from utils import file_io as uff
 import logging
 
@@ -34,7 +33,7 @@ def merge_csv_files(in_file_dir_path: str, out_file: str) -> None:
     in_csv_files = glob.glob(f"{in_file_dir_path}/*.csv")
 
     with uff.uf_open_file(file_path=out_file, open_mode="w") as of:
-        with uff.uf_open_file_list(files=in_file_dir_path) as fi:
+        with uff.uf_open_file_list(files=in_csv_files) as fi:
             for line in fi:
                 if fi.lineno() == 1 or fi.filelineno() > 1:
                     of.write(line)
