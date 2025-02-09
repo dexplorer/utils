@@ -24,7 +24,7 @@ def uf_open_file(file_path: str, open_mode: str):
         return f
 
 
-def uf_open_file_list(files: list[str]) -> fileinput.FileInput:
+def uf_open_file_list(files: list[str]):
     """
     Open a list of files with exception handling.
 
