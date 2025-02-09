@@ -1,5 +1,7 @@
 import pytest
-from src.utils import misc as ufm
+# Doing src.utils fixes the coverage issue but breaks the lint
+# from src.utils import misc as ufm
+from utils import misc as ufm
 
 test_data1 = [
     (

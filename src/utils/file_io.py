@@ -1,5 +1,5 @@
 import logging
-import fileinput
+import fileinput as fin
 
 
 def uf_open_file(file_path: str, open_mode: str):
@@ -37,7 +37,7 @@ def uf_open_file_list(files: list[str]):
 
     try:
         if files:
-            fi = fileinput.input(files=files, encoding="utf-8")
+            fi = fin.input(files=files, encoding="utf-8")
         else:
             raise ValueError("File list is empty.")
 
