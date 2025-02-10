@@ -42,7 +42,7 @@ def read_spark_table_into_list_of_dict(
 
 
 def read_spark_table_spark_df(
-    qual_target_table_name: str,
+    qual_table_name: str,
     cur_eff_date: str = "",
     spark: SparkSession = None,
     warehouse_path: str = "",
@@ -52,10 +52,10 @@ def read_spark_table_spark_df(
 
     if cur_eff_date:
         df = spark.sql(
-            f"SELECT * FROM {qual_target_table_name} WHERE EFFECTIVE_DATE='{cur_eff_date}';"
+            f"SELECT * FROM {qual_table_name} WHERE EFFECTIVE_DATE='{cur_eff_date}';"
         )
     else:
-        df = spark.sql(f"SELECT * FROM {qual_target_table_name};")
+        df = spark.sql(f"SELECT * FROM {qual_table_name};")
 
     return df
 
