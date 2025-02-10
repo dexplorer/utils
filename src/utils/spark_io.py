@@ -41,7 +41,7 @@ def read_spark_table_into_list_of_dict(
     return records
 
 
-def read_spark_table_spark_df(
+def read_spark_table_into_spark_df(
     qual_table_name: str,
     cur_eff_date: str = "",
     spark: SparkSession = None,
