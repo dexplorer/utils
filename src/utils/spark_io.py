@@ -61,7 +61,7 @@ def read_spark_table_into_spark_df(
 
 
 def read_delim_file_into_spark_df(
-    file_path: str, delim: str, warehouse_path: str = ""
+    file_path: str, delim: str, spark: SparkSession = None, warehouse_path: str = ""
 ) -> DataFrame:
     if (not spark) and warehouse_path:
         spark = create_spark_session(warehouse_path=warehouse_path)
