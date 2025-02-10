@@ -82,6 +82,14 @@ def convert_df_to_list_of_dict(df: DataFrame) -> list[dict]:
     return records
 
 
+def create_empty_df(spark: SparkSession = None, warehouse_path: str = ""):
+    if (not spark) and warehouse_path:
+        spark = create_spark_session(warehouse_path=warehouse_path)
+
+    df = spark.createDataFrame([], "dummy_column: string")
+    return df
+
+
 # def convert_df_to_pandas_df(df: DataFrame) -> pd.DataFrame:
 #     pdf = df.toPandas()
 #     print(pdf.info())
