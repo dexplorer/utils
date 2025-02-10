@@ -1,4 +1,5 @@
 import pytest
+
 # Doing src.utils fixes the coverage issue but breaks the lint
 # from src.utils import misc as ufm
 from utils import misc as ufm
