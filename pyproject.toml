@@ -22,7 +22,6 @@ dependencies = [
   "pyspark == 3.5.4",
   "pandas == 2.1.4",
   "requests", 
-  "csvkit", 
 ]
 keywords = ["data", "utils", "etl", "elt", "framework", "io"]
 
