@@ -1,4 +1,5 @@
 from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql.types import StructType
 
 
 def create_spark_session(warehouse_path) -> SparkSession:
@@ -82,6 +83,13 @@ def convert_df_to_list_of_dict(df: DataFrame) -> list[dict]:
     return records
 
 
+# def convert_df_to_pandas_df(df: DataFrame) -> pd.DataFrame:
+#     pdf = df.toPandas()
+#     print(pdf.info())
+#     print(pdf.head(2))
+#     return pdf
+
+
 def create_empty_df(spark: SparkSession = None, warehouse_path: str = ""):
     if (not spark) and warehouse_path:
         spark = create_spark_session(warehouse_path=warehouse_path)
@@ -90,8 +98,9 @@ def create_empty_df(spark: SparkSession = None, warehouse_path: str = ""):
     return df
 
 
-# def convert_df_to_pandas_df(df: DataFrame) -> pd.DataFrame:
-#     pdf = df.toPandas()
-#     print(pdf.info())
-#     print(pdf.head(2))
-#     return pdf
+def get_json_schema_from_df(df: DataFrame) -> dict[str:any]:
+    return df.schema.jsonValue()
+
+
+def get_struct_schema_from_json(json_schema: dict[str:any]) -> StructType:
+    return StructType.fromJson(json_schema)
