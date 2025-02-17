@@ -66,11 +66,14 @@ git push origin v1.0.0            # pushes tag to remote
 git tag --delete v1.0.0           # deletes tag locally    
 git push --delete origin v1.0.0   # deletes remote tag
 
+# Revert all local uncommitted changes (should be executed in repo root, run this if you want to discard changes!)
+git checkout . 
+
 # Unstage all files you might have staged with git add
 git reset
 
-# Revert all local uncommitted changes (should be executed in repo root)
-git checkout . 
+# Revert changes committed to local (if you have NOT pushed your changes to remote)
+git reset HEAD~1
 
 # git diff commands
 
