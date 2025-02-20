@@ -29,9 +29,19 @@ def uf_read_delim_file_to_list_of_dict(file_path: str, delim=",") -> list[dict]:
         logging.error(error)
         raise
 
-
+# remove this after replacing the references with the new func below
 def merge_csv_files(in_file_dir_path: str, out_file: str) -> None:
-    in_csv_files = glob.glob(f"{in_file_dir_path}/*.csv")
+    in_csv_files = glob.glob(f"{in_file_dir_path}/{in_file_pattern}.csv")
+
+    with uff.uf_open_file(file_path=out_file, open_mode="w") as of:
+        with uff.uf_open_file_list(files=in_csv_files) as fi:
+            for line in fi:
+                if fi.lineno() == 1 or fi.filelineno() > 1:
+                    of.write(line)
+
+
+def uf_merge_csv_files(in_file_dir_path: str, in_file_pattern: str='*', out_file: str) -> None:
+    in_csv_files = glob.glob(f"{in_file_dir_path}/{in_file_pattern}.csv")
 
     with uff.uf_open_file(file_path=out_file, open_mode="w") as of:
         with uff.uf_open_file_list(files=in_csv_files) as fi:
