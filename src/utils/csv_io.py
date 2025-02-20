@@ -4,6 +4,7 @@ import csv
 import glob
 from utils import file_io as uff
 import logging
+from dataclasses import fields, asdict
 
 csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_STRINGS)
 
@@ -37,3 +38,26 @@ def merge_csv_files(in_file_dir_path: str, out_file: str) -> None:
             for line in fi:
                 if fi.lineno() == 1 or fi.filelineno() > 1:
                     of.write(line)
+
+
+def uf_write_list_of_data_cls_obj_to_delim_file(
+    dataclass_obj_list: list, file_path: str, delim=","
+):
+    field_names = []
+    try:
+        if dataclass_obj_list:
+            dataclass_obj = dataclass_obj_list[0]
+            field_names = [fld.name for fld in fields(dataclass_obj)]
+        else:
+            raise RuntimeError("No data in the dataclass object list.")
+    except RuntimeError as error:
+        logging.error(error)
+
+    with uff.uf_open_file(file_path=file_path, open_mode="w") as f:
+        if delim == "|":
+            writer = csv.DictWriter(f, dialect="pipe", fieldnames=field_names)
+        else:
+            writer = csv.DictWriter(f, fieldnames=field_names)
+
+        writer.writeheader()
+        writer.writerows([asdict(obj) for obj in dataclass_obj_list])

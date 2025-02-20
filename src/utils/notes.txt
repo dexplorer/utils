@@ -139,6 +139,12 @@ pip list --local
 pip freeze | xargs pip uninstall -y
 pip freeze --local | xargs pip uninstall -y
 
+# view installed package
+pip show <package name>
+
+# uninstall package
+pip uninstall <package name>
+
 # get python command line options
 python —help 
 
