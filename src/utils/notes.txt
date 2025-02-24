@@ -127,6 +127,9 @@ Then, before applying the stash, you should merge in dev, to apply the new file 
 git merge dev # add --squash to avoid getting a bubble in your tree
 # fix conflict and commit
 
+# show remote URL where the local repo was cloned from 
+git remote show origin
+
 ####
 # python venv related
 ####
