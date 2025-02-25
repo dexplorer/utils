@@ -47,7 +47,9 @@ make test
 ####
 
 # git commands
-# Let's say you have created a new repo on github. So the first step would be to clone the repo:git clone {Your Repo URL}
+# Let's say you have created a new repo on github. So the first step would be to clone the repo:
+git clone {Your Repo URL}
+git clone https://github.com/dexplorer/df-app-calendar.git
 
 # You do your work, add some files, code etc., then push your changes with:
 
