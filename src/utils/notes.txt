@@ -132,6 +132,12 @@ git merge dev # add --squash to avoid getting a bubble in your tree
 # show remote URL where the local repo was cloned from 
 git remote show origin
 
+
+# git push permission issue from codespace
+Create a personal access token under Profile -> Settings -> Developer Settings
+git remote set-url origin https://<TOKEN>@github.com/username/repository.git
+git push
+
 ####
 # python venv related
 ####
