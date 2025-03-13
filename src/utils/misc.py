@@ -1,4 +1,5 @@
 from itertools import groupby
+import inspect as ins
 
 
 def check_if_any_list_item_in_str(items: list, text: str) -> bool:
@@ -37,3 +38,44 @@ def dedupe_list_of_dict_by_value_priority(
 
 def flatten_list(nested_list: list) -> list:
     return [item for inner_list in nested_list for item in inner_list]
+
+
+def dump_as_str(
+    obj,
+    obj_types: tuple = (),
+    indent_size: int = 2,
+    indent_level: int = 1,
+    wrap: bool = False,
+) -> str:
+    line_delim = " "
+    if wrap:
+        line_delim = "\n"
+
+    result = f"{obj.__name__}: {obj.__class__.__name__}{line_delim}"
+
+    # Not all objects have a __dict__ method
+    items = {}
+    if "__dict__" in dir(obj):
+        items = obj.__dict__.items()
+    else:
+        for attr in dir(obj):
+            items[attr] = getattr(obj, attr)
+
+    for k, v in items:
+        if (
+            not k.startswith("__")
+            and not ins.ismethod(getattr(obj, k))
+            and not ins.isfunction(getattr(obj, k))
+        ):
+            if isinstance(v, obj_types):
+                v_str = v.__str__(
+                    obj=v,
+                    obj_types=obj_types,
+                    indent_size=indent_size,
+                    indent_level=indent_level + 1,
+                )
+            else:
+                v_str = str(v)
+            result += f"{' ' * (indent_size * indent_level)}{k}: {v_str}{line_delim}"
+
+    return result

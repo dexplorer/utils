@@ -1,7 +1,7 @@
 install: pyproject.toml
 	pip install --upgrade pip &&\
 	pip install --editable . 
-	pip install .[test]
+	pip install --editable .[test]
 
 # pyproject.toml above is a dependency for install. \
 It is supposed to run only if pyproject.toml has changed.
