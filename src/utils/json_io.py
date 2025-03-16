@@ -35,7 +35,7 @@ def uf_write_list_of_data_cls_obj_to_json_file(obj_list: list, file_path: str):
 def uf_write_data_cls_obj_to_json_file(obj, file_path: str):
     try:
         if obj:
-            json_str = json.dumps(obj, default=lambda x: x.__dict__)
+            json_str = json.dumps(obj, default=lambda x: x.__dict__, indent=4)
         else:
             raise RuntimeError("No data in the dataclass object.")
     except RuntimeError as error:
@@ -55,4 +55,4 @@ def uf_merge_json_files(
             data = json.load(fi)
             merged_data.append(data)
     with uff.uf_open_file(file_path=out_file, open_mode="w") as f:
-        json.dump(merged_data, f)
+        json.dump(merged_data, f, indent=4)
