@@ -19,13 +19,15 @@ classifiers = [
 #license-files = ["LICEN[CS]E*"]
 dependencies = [
   # app specific 
-  "pyspark == 3.5.4",
   "pandas == 2.1.4",
   "requests", 
 ]
 keywords = ["data", "utils", "etl", "elt", "framework", "io"]
 
 [project.optional-dependencies]
+spark = [
+  "pyspark == 3.5.4",
+  ]
 test = [
   # standard dev tools
   "pytest",

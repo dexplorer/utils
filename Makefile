@@ -1,7 +1,8 @@
 install: pyproject.toml
 	pip install --upgrade pip &&\
-	TMPDIR=/home/ec2-user/pip_cache pip install --cache-dir=/home/ec2-user/pip_cache --editable . &&\
-	TMPDIR=/home/ec2-user/pip_cache pip install --cache-dir=/home/ec2-user/pip_cache --editable .[test]
+	pip install --editable . &&\
+	TMPDIR=/home/ec2-user/pip_cache pip install --cache-dir=/home/ec2-user/pip_cache --editable .[spark]
+	pip install --editable .[test]
 
 # pyproject.toml above is a dependency for install. \
 It is supposed to run only if pyproject.toml has changed.
