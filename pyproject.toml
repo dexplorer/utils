@@ -28,6 +28,10 @@ keywords = ["data", "utils", "etl", "elt", "framework", "io"]
 spark = [
   "pyspark == 3.5.4",
   ]
+aws = [
+  "boto3", 
+#  "awswrangler", 
+]
 test = [
   # standard dev tools
   "pytest",
@@ -36,6 +40,12 @@ test = [
   "black",
   "ipython",
 ]
+all-dev = [
+  "utils[spark, aws, test]"
+  ]
+all = [
+  "utils[spark, aws]"
+  ]
 
 [project.scripts]
 

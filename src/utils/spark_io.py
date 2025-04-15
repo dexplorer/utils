@@ -7,6 +7,15 @@ def create_spark_session(warehouse_path) -> SparkSession:
     spark = (
         SparkSession.builder.appName("Spark Loader in Ingestion Workflow")
         .config("spark.sql.warehouse.dir", warehouse_path)
+        # The following are needed for spark-aws integration
+        # .config("spark.hadoop.fs.s3a.aws.credentials.provider", "software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider")
+        # .config("spark.hadoop.fs.s3a.aws.credentials.provider", "software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider")
+        # .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain")
+        # .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+        .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.4")
+        # .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.4.1")
+        .config("spark.jars.packages", "com.amazonaws:aws-java-sdk-bundle:1.12.782")
+        # .config("spark.jars.packages", "software.amazon.awssdk:bundle:2.31.21")
         .enableHiveSupport()
         .getOrCreate()
     )

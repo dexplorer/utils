@@ -15,7 +15,10 @@ def uf_open_file(file_path: str, open_mode: str):
     """
 
     try:
-        f = open(file_path, open_mode, encoding="utf-8")
+        if open_mode in ['rb', 'wb']:
+            f = open(file_path, open_mode)
+        else:
+            f = open(file_path, open_mode, encoding="utf-8")
     except FileNotFoundError as error:
         logging.error(error)
         raise  # re-raise error with stack trace

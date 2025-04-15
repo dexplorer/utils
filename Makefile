@@ -1,8 +1,7 @@
-install: pyproject.toml
+install-dev: pyproject.toml
 	pip install --upgrade pip &&\
-	pip install --editable . &&\
-	TMPDIR=/home/ec2-user/pip_cache pip install --cache-dir=/home/ec2-user/pip_cache --editable .[spark] &&\
-	pip install --editable .[test]
+	pip install --editable .[all-dev]
+	# TMPDIR=/home/ec2-user/pip_cache pip install --cache-dir=/home/ec2-user/pip_cache --editable .[spark] &&\
 
 # pyproject.toml above is a dependency for install. \
 It is supposed to run only if pyproject.toml has changed.
@@ -26,7 +25,7 @@ format:
 	black src/utils/*.py
 	black tests/*.py
 
-all: install lint format test 
+local-all: install-dev lint format test 
 
 # Make sure to specify the targets (install, setup, etc) in the same line as the 'all' target. \
 These are dependencies. This is what makes them run in order.
