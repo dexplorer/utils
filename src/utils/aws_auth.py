@@ -9,6 +9,7 @@ def get_secret(secret_name):
     secret = ufh.get_http_response(url=f"{SECRET_SIDECAR_URL}/{secret_name}")
     return secret
 
+
 def get_aws_session(aws_iam_user: str, aws_region: str):
     aws_iam_user_access_key = get_secret(f"IAM_USER_{aws_iam_user.upper()}_ACCESS_KEY")
     aws_iam_user_secret = get_secret(f"IAM_USER_{aws_iam_user.upper()}_SECRET")

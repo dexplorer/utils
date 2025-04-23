@@ -15,7 +15,7 @@ def uf_open_file(file_path: str, open_mode: str):
     """
 
     try:
-        if open_mode in ['rb', 'wb']:
+        if open_mode in ["rb", "wb"]:
             f = open(file_path, open_mode)
         else:
             f = open(file_path, open_mode, encoding="utf-8")

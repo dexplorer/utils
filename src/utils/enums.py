@@ -38,3 +38,23 @@ class LogHandler(StrEnum):
     TIMED_ROTATING_FILE_HANDLER = auto()
     STREAM_HANDLER_STDOUT = auto()
     STREAM_HANDLER_STDERR = auto()
+
+
+class SparkHostPattern(StrEnum):
+    ON_PREM_VM_NATIVE = auto()
+    AWS_EC2_NATIVE = auto()
+    AWS_EC2_CONTAINER = auto()
+    AWS_EMR_CLUSTER = auto()
+
+
+class SparkClusterManager(StrEnum):
+    LOCAL = auto()
+    STANDALONE = auto()
+    YARN = auto()
+    KUBERNETES = auto()
+
+
+class SparkDeployMode(StrEnum):
+    LOCAL = auto()
+    CLIENT = auto()
+    CLUSTER = auto()
