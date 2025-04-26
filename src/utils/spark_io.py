@@ -1,23 +1,37 @@
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import StructType
-from utils.enums import AppHostPattern, SparkHostPattern
 
 import logging
 
 
 def create_spark_session_using_connect(
-    warehouse_path: str,
-    spark_master: str,
-    spark_history_log_dir: str,
-    spark_local_dir: str,
-    postgres_host: str,
+    spark_connect_uri: str,
+    hive_metastore_uri: str,
 ) -> SparkSession:
     # Initialize Spark session
+    logging.info("Creating spark connect session using %s", spark_connect_uri)
     spark = (
         SparkSession.builder.appName("Data Framework Spark Workflow")
-        .remote("sc://172.18.0.7:15002")
+        .remote(spark_connect_uri)
+        # .config("spark.hadoop.metastore.catalog.default", "hive")
+        # .config("spark.hadoop.hive.metastore.uris", hive_metastore_uri)
+        # .config("spark.sql.catalogImplementation", "hive")
+        # .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.hive.HiveExternalCatalog")
+        # .config("hive.metastore.uris", hive_metastore_uri)
         .enableHiveSupport()
         .getOrCreate()
+    )
+
+    df = spark.sql(
+        "select current_catalog() as catalog, current_database() as database, current_schema() as schema, current_user()as user;"
+    ).first()
+
+    logging.info(
+        "Catalog: %s, Database: %s, Schema: %s, User: %s",
+        df["catalog"],
+        df["database"],
+        df["schema"],
+        df["user"],
     )
 
     return spark
@@ -25,15 +39,15 @@ def create_spark_session_using_connect(
 
 def create_spark_session(
     warehouse_path: str,
-    spark_master: str,
+    spark_master_uri: str,
     spark_history_log_dir: str,
     spark_local_dir: str,
-    postgres_host: str,
+    postgres_uri: str,
 ) -> SparkSession:
     # Initialize Spark session
     spark = (
         SparkSession.builder.appName("Data Framework Spark Workflow")
-        .master(spark_master)
+        .master(spark_master_uri)
         .config("spark.submit.deployMode", "client")
         .config("spark.sql.warehouse.dir", warehouse_path)
         .config("hive.metastore.warehouse.dir", warehouse_path)
@@ -46,7 +60,7 @@ def create_spark_session(
         # JDBC connect string for a JDBC metastore
         .config(
             "javax.jdo.option.ConnectionURL",
-            f"jdbc:postgresql://{postgres_host}:5432/hive_metastore",
+            postgres_uri,
         )
         # Driver class name for a JDBC metastore
         .config("javax.jdo.option.ConnectionDriverName", "org.postgresql.Driver")

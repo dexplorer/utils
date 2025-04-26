@@ -26,9 +26,10 @@ keywords = ["data", "utils", "etl", "elt", "framework", "io"]
 
 [project.optional-dependencies]
 spark = [
-  "pyspark == 3.5.4",
-  "grpcio == 1.71.0",
-  "grpcio-status == 1.71.0",
+  "pyspark[connect] == 3.5.4",
+  "setuptools",
+  #"grpcio == 1.71.0",
+  #"grpcio-status == 1.71.0",
   ]
 aws = [
   "boto3", 
