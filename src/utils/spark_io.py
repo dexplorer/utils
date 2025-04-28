@@ -6,7 +6,6 @@ import logging
 
 def create_spark_session_using_connect(
     spark_connect_uri: str,
-    hive_metastore_uri: str,
 ) -> SparkSession:
     # Initialize Spark session
     logging.info("Creating spark connect session using %s", spark_connect_uri)

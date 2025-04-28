@@ -16,7 +16,7 @@ def uf_open_file(file_path: str, open_mode: str):
 
     try:
         if open_mode in ["rb", "wb"]:
-            f = open(file_path, open_mode)
+            f = open(file_path, open_mode)  # pylint: disable=W1514
         else:
             f = open(file_path, open_mode, encoding="utf-8")
     except FileNotFoundError as error:

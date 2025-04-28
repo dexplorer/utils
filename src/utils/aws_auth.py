@@ -6,7 +6,7 @@ SECRET_SIDECAR_URL = os.environ.get("SECRET_SIDECAR_URL", "http://localhost:8080
 
 
 def get_secret(secret_name):
-    secret = ufh.get_http_response(url=f"{SECRET_SIDECAR_URL}/{secret_name}")
+    secret = ufh.get_request(url=f"{SECRET_SIDECAR_URL}/{secret_name}")
     return secret
 
 
