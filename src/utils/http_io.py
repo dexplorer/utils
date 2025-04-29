@@ -2,16 +2,18 @@ import requests
 import logging
 
 
-def get_request(url: str, payload: dict = None, connection_timeout=3, read_timeout=5):
+def get_request(
+    url: str, payload: dict = None, connection_timeout=3, read_timeout=5, verify=True
+):
     headers = headers = {
         "accept": "application/json",
         # "content-type": "text/csv",
         # "x-api-version": "2",
         # "auth": session_id,
     }
-    verify = False
-    connection_timeout = 3
-    read_timeout = 5
+
+    if url.startswith("http://"):
+        verify = False
 
     try:
         response = requests.get(
@@ -36,7 +38,10 @@ def get_request(url: str, payload: dict = None, connection_timeout=3, read_timeo
 
 
 def get_request_with_json_resp_as_dict(
-    url: str, payload: dict, connection_timeout=3, read_timeout=5
+    url: str,
+    payload: dict,
+    connection_timeout=3,
+    read_timeout=5,
 ) -> dict:
     response = get_request(
         url=url,

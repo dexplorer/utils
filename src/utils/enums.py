@@ -22,10 +22,10 @@ class AppHostPattern(StrEnum):
 
 
 class AppHostPatternEnvFile(StrEnum):
-    ON_PREM_VM_NATIVE = "on_prem_vm_native.env"
-    AWS_EC2_NATIVE = "aws_ec2_native.env"
-    AWS_EC2_CONTAINER = "aws_ec2_container.env"
-    AWS_ECS_CONTAINER = "aws_ecs_container.env"
+    ON_PREM_VM_NATIVE = ".env.on_prem_vm_native"
+    AWS_EC2_NATIVE = ".env.aws_ec2_native"
+    AWS_EC2_CONTAINER = ".env.aws_ec2_container"
+    AWS_ECS_CONTAINER = ".env.aws_ecs_container"
 
 
 class StoragePlatform(StrEnum):
