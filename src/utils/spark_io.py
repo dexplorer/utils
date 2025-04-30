@@ -39,24 +39,25 @@ def create_spark_session_using_connect(
 
     return spark
 
-
 def create_spark_session(
     warehouse_path: str,
     spark_master_uri: str,
     spark_history_log_dir: str,
     spark_local_dir: str,
     postgres_uri: str,
+    # hive_metastore_postgres_db: str,
 ) -> SparkSession:
     # Initialize Spark session
     spark = (
         SparkSession.builder.appName("Data Framework Spark Workflow")
         .master(spark_master_uri)
-        .config("spark.submit.deployMode", "client")
+        .config("spark.submit.deployMode", "cluster")
         .config("spark.sql.warehouse.dir", warehouse_path)
         .config("hive.metastore.warehouse.dir", warehouse_path)
         .config("spark.history.fs.logDirectory", spark_history_log_dir)
-        .config("job.local.dir", spark_local_dir)
-        .config("fs.defaultFS", "file:///")
+        .config("spark.local.dir", spark_local_dir)
+        # .config("job.local.dir", spark_local_dir)
+        # .config("fs.defaultFS", "file:///")
         # The following settings are from hive-site.xml.
         # These should be effective during spark cluster setup.
         # But they are not. So, we have to force set them here.
@@ -64,6 +65,7 @@ def create_spark_session(
         .config(
             "javax.jdo.option.ConnectionURL",
             postgres_uri,
+            # f"jdbc:postgresql://{postgres_host}:5432/{hive_metastore_postgres_db}",
         )
         # Driver class name for a JDBC metastore
         .config("javax.jdo.option.ConnectionDriverName", "org.postgresql.Driver")
@@ -74,6 +76,7 @@ def create_spark_session(
         .config("datanucleus.schema.autoCreateTables", "true")
         .config("hive.metastore.schema.verification", "false")
         # End of configs from hive-site.xml.
+        # .config("spark.unsafe.sorter.spill.read.ahead.enabled", "false")
         .enableHiveSupport()
         .getOrCreate()
     )
