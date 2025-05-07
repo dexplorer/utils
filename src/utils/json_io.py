@@ -1,6 +1,7 @@
-import json
 import glob
+import json
 import logging
+
 from utils import file_io as uff
 
 

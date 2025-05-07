@@ -1,10 +1,10 @@
 import csv
 import logging
-from urllib.parse import urlparse
-import boto3
+from dataclasses import asdict, fields
 from io import StringIO
-from dataclasses import fields, asdict
+from urllib.parse import urlparse
 
+import boto3
 import botocore
 
 # from botocore.errorfactory import ClientError
@@ -12,8 +12,11 @@ import botocore
 csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_STRINGS)
 
 
-def get_s3_client(s3_region: str):
-    client = boto3.client("s3", region_name=s3_region)
+def get_s3_client(s3_region: str = ""):
+    if s3_region:
+        client = boto3.client("s3", region_name=s3_region)
+    else:
+        client = boto3.client("s3")
     return client
 
 

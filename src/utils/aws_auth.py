@@ -1,5 +1,7 @@
 import os
+
 import boto3
+
 from utils import http_io as ufh
 
 SECRET_SIDECAR_URL = os.environ.get("SECRET_SIDECAR_URL", "http://localhost:8080")

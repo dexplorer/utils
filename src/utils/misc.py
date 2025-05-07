@@ -1,5 +1,5 @@
-from itertools import groupby
 import inspect as ins
+from itertools import groupby
 
 
 def check_if_any_list_item_in_str(items: list, text: str) -> bool:

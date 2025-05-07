@@ -1,7 +1,8 @@
 import logging
-from logging.handlers import TimedRotatingFileHandler
-from utils.enums import LogHandler
 import sys
+from logging.handlers import TimedRotatingFileHandler
+
+from utils.enums import LogHandler
 
 
 def config_logger(log_file_path_name):

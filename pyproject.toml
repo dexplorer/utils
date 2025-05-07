@@ -42,6 +42,7 @@ test = [
   "pylint",
   "black",
   "ipython",
+  "isort",
 ]
 all-dev = [
   "utils[spark, aws, test]"
@@ -58,3 +59,14 @@ Documentation = "https://readthedocs.org"
 Repository = "https://github.com/dexplorer/utils.git"
 Issues = "https://github.com/dexplorer/utils/issues"
 Changelog = "https://github.com/dexplorer/utils/blob/master/CHANGELOG.md"
+
+[tool.black]
+#line-length = 79
+
+[tool.isort]
+profile = "black"
+#line_length = 79
+known_third_party = ["pyspark"]  
+known_first_party = ["utils"]  
+sections = ["FUTURE","STDLIB","THIRDPARTY","FIRSTPARTY","LOCALFOLDER"]
+src_paths = ["src", "utils"]  

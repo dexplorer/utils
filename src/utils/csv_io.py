@@ -2,9 +2,10 @@
 # import os
 import csv
 import glob
-from utils import file_io as uff
 import logging
-from dataclasses import fields, asdict
+from dataclasses import asdict, fields
+
+from utils import file_io as uff
 
 csv.register_dialect("pipe", delimiter="|", quoting=csv.QUOTE_STRINGS)
 

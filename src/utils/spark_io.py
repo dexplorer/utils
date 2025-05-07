@@ -1,11 +1,10 @@
-from pyspark.sql import SparkSession, DataFrame
-from pyspark.sql.types import StructType
-
-import subprocess
+import logging
 import shlex
+import subprocess
 import threading
 
-import logging
+from pyspark.sql import DataFrame, SparkSession
+from pyspark.sql.types import StructType
 
 
 def create_spark_session_using_connect(
@@ -39,6 +38,7 @@ def create_spark_session_using_connect(
 
     return spark
 
+
 def create_spark_session(
     warehouse_path: str,
     spark_master_uri: str,
@@ -47,17 +47,25 @@ def create_spark_session(
     postgres_uri: str,
     # hive_metastore_postgres_db: str,
 ) -> SparkSession:
+
+    # jars_dir = os.path.abspath("/home/ec2-user/workspaces/df-spark/spark_home/jars")
+    # hadoop_jar = os.path.join(jars_dir, "hadoop-aws-3.3.4.jar")
+    # aws_jar = os.path.join(jars_dir, "aws-java-sdk-bundle-1.12.782.jar")
+
     # Initialize Spark session
     spark = (
         SparkSession.builder.appName("Data Framework Spark Workflow")
         .master(spark_master_uri)
-        .config("spark.submit.deployMode", "cluster")
+        # .config("spark.submit.deployMode", "client")
         .config("spark.sql.warehouse.dir", warehouse_path)
-        .config("hive.metastore.warehouse.dir", warehouse_path)
+        # .config("hive.metastore.warehouse.dir", warehouse_path)
         .config("spark.history.fs.logDirectory", spark_history_log_dir)
         .config("spark.local.dir", spark_local_dir)
         # .config("job.local.dir", spark_local_dir)
         # .config("fs.defaultFS", "file:///")
+        # .config("spark.jars", f"{hadoop_jar},{aws_jar}")
+        # .config("spark.driver.extraClassPath", f"{hadoop_jar}:{aws_jar}")
+        # .config("spark.executor.extraClassPath", f"{hadoop_jar}:{aws_jar}")
         # The following settings are from hive-site.xml.
         # These should be effective during spark cluster setup.
         # But they are not. So, we have to force set them here.
@@ -77,6 +85,10 @@ def create_spark_session(
         .config("hive.metastore.schema.verification", "false")
         # End of configs from hive-site.xml.
         # .config("spark.unsafe.sorter.spill.read.ahead.enabled", "false")
+        # The following are needed for spark-aws integration
+        # .config("spark.hadoop.fs.s3a.aws.credentials.provider", "com.amazonaws.auth.DefaultAWSCredentialsProviderChain")
+        # .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+        # .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:3.3.4,com.amazonaws:aws-java-sdk-bundle:1.12.782")
         .enableHiveSupport()
         .getOrCreate()
     )
@@ -153,19 +165,20 @@ def create_spark_session_wo_aws_integration(
 
 
 def read_spark_table_into_list_of_dict(
-    qual_target_table_name: str,
+    qual_table_name: str,
     cur_eff_date: str = "",
     spark: SparkSession = None,
 ) -> list[dict]:
-    # if (not spark) and warehouse_path:
-    #     spark = create_spark_session(warehouse_path=warehouse_path)
+
+    # Refresh metadata before reading the table
+    refresh_table_metadata_in_spark_catalog(qual_table_name=qual_table_name, spark=spark)
 
     if cur_eff_date:
         df = spark.sql(
-            f"SELECT * FROM {qual_target_table_name} WHERE EFFECTIVE_DATE='{cur_eff_date}';"
+            f"SELECT * FROM {qual_table_name} WHERE EFFECTIVE_DATE='{cur_eff_date}';"
         )
     else:
-        df = spark.sql(f"SELECT * FROM {qual_target_table_name};")
+        df = spark.sql(f"SELECT * FROM {qual_table_name};")
     # print("Spark dataframe")
     # df.printSchema()
     # df.show(2)
@@ -197,18 +210,29 @@ def read_spark_table_into_spark_df(
 def read_delim_file_into_spark_df(
     file_path: str,
     delim: str,
+    schema: StructType = None,
     spark: SparkSession = None,
 ) -> DataFrame:
     # if (not spark) and warehouse_path:
     #     spark = create_spark_session(warehouse_path=warehouse_path)
 
-    df = (
-        spark.read.format("csv")
-        .option("header", "true")
-        .option("delimiter", delim)
-        .option("inferSchema", "true")
-        .load(file_path)
-    )
+    if schema:
+        df = (
+            spark.read.format("csv")
+            .option("header", "true")
+            .option("delimiter", delim)
+            .option("schema", schema)
+            .load(file_path)
+        )
+    else:
+        df = (
+            spark.read.format("csv")
+            .option("header", "true")
+            .option("delimiter", delim)
+            .option("inferSchema", "true")
+            .load(file_path)
+        )
+
     return df
 
 
@@ -301,7 +325,7 @@ def spark_submit_callback(return_code: int):
 
 
 def spark_submit_with_wait(command: str):
-    logging.info("Spark submit command string: %s", command)
+    logging.debug("Spark submit command string: %s", command)
     spark_submit_command = shlex.split(command, posix=False)
     # print(spark_submit_command)
     logging.info("Spark submit command: %s", spark_submit_command)
@@ -326,3 +350,8 @@ def spark_submit_with_wait(command: str):
         raise
 
     return status_code
+
+
+def refresh_table_metadata_in_spark_catalog(qual_table_name: str, spark: SparkSession):
+    # Refresh metadata so that current parquet file names are used
+    spark.catalog.refreshTable(tableName=qual_table_name)

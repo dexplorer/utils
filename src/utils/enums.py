@@ -27,6 +27,12 @@ class AppHostPatternEnvFile(StrEnum):
     AWS_EC2_CONTAINER = ".env.aws_ec2_container"
     AWS_ECS_CONTAINER = ".env.aws_ecs_container"
 
+class AppHostPatternDefaultEnvFile(StrEnum):
+    ON_PREM_VM_NATIVE = ".env.default"
+    AWS_EC2_NATIVE = ".env.default"
+    AWS_EC2_CONTAINER = ".env.default.aws_ec2_container"
+    AWS_ECS_CONTAINER = ".env.default.aws_ecs_container"
+
 
 class StoragePlatform(StrEnum):
     NAS_STORAGE = auto()
