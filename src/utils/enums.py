@@ -21,17 +21,17 @@ class AppHostPattern(StrEnum):
     AWS_ECS_CONTAINER = auto()
 
 
-class AppHostPatternEnvFile(StrEnum):
-    ON_PREM_VM_NATIVE = ".env.on_prem_vm_native"
-    AWS_EC2_NATIVE = ".env.aws_ec2_native"
-    AWS_EC2_CONTAINER = ".env.aws_ec2_container"
-    AWS_ECS_CONTAINER = ".env.aws_ecs_container"
+# class AppHostPatternEnvFile(StrEnum):
+#     ON_PREM_VM_NATIVE = "app_env.on_prem_vm_native.dev.env"
+#     AWS_EC2_NATIVE = "app_env.aws_ec2_native.dev.env"
+#     AWS_EC2_CONTAINER = "app_env.aws_ec2_container.dev.env"
+#     AWS_ECS_CONTAINER = "app_env.aws_ecs_container.dev.env"
 
-class AppHostPatternDefaultEnvFile(StrEnum):
-    ON_PREM_VM_NATIVE = ".env.default"
-    AWS_EC2_NATIVE = ".env.default"
-    AWS_EC2_CONTAINER = ".env.default.aws_ec2_container"
-    AWS_ECS_CONTAINER = ".env.default.aws_ecs_container"
+# class AppHostPatternDefaultEnvFile(StrEnum):
+#     ON_PREM_VM_NATIVE = ".env.default"
+#     AWS_EC2_NATIVE = ".env.default"
+#     AWS_EC2_CONTAINER = "global_env.aws_ec2_container.dev.env"
+#     AWS_ECS_CONTAINER = ".env.default.aws_ecs_container.env"
 
 
 class StoragePlatform(StrEnum):
